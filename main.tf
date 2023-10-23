@@ -21,7 +21,7 @@ data "aws_vpc" "default"{
 resource "aws_instance" "tester" {
   ami           = data.aws_ami.app_ami.id
   instance_type = var.instance_type
-  vpc_security_group_ids = [ aws_security_group.tester.id ]
+  vpc_security_group_ids = [ module.security-group.security_group_id ]
 
   tags = {
     Name = "HelloWorld"
@@ -62,4 +62,18 @@ resource "aws_security_group_rule" "allow_everything" {
   cidr_blocks       = [ "0.0.0.0/0" ]
   security_group_id = aws_security_group.tester.id
 
+}
+
+
+module "security-group" {
+  source       = "terraform-aws-modules/security-group/aws"
+  version      = "5.1.0"
+  vpc_id       = data.aws_vpc.default.id
+  name         ="security_groups_using_modules"
+  
+  ingress_rules       = ["http-80-tcp", "https-443-tcp"]
+  ingress_cidr_blocks = ["0.0.0.0/0"]
+  
+  egress_rules       = ["all-all"]
+  egress_cidr_blocks = ["0.0.0.0/0"]
 }
