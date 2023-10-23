@@ -29,7 +29,7 @@ resource "aws_instance" "tester" {
 }
 
 resource "aws_security_group" "tester" {
-  name         = tester
+  name         = "tester"
   description  = "security group for learning terraform that allows http and https"
   vpc_id       = data.aws_vpc.default.id
 }
