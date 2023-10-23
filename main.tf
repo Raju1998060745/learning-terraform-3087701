@@ -44,7 +44,7 @@ resource "aws_security_group_rule" "tester_http_in" {
 
 }
 
-resource "aws_security_group_rule" "tester_http_in" {
+resource "aws_security_group_rule" "tester_https_in" {
   type              = "ingress"
   from_port         = 443
   to_port           = 443
@@ -54,7 +54,7 @@ resource "aws_security_group_rule" "tester_http_in" {
 
 }
 
-resource "aws_security_group_rule" "tester_http_in" {
+resource "aws_security_group_rule" "allow_everything" {
   type              = "egress"
   from_port         = 0
   to_port           = 0
