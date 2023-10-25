@@ -78,9 +78,7 @@ module "alb" {
   subnets            = module.tester_vpc.public_subnets
   security_groups    = [module.security-group.security_group_id]
 
-  access_logs = {
-    bucket = "my-alb-logs"
-  }
+
 
   target_groups = [
     {
